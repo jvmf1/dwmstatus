@@ -42,5 +42,5 @@ void cell_run(Cell *c, pthread_mutex_t *lock) {
 	sl_str_replace_char(c->data, '\n', ' ');
 	if (c->data->data[c->data->len-1]==' ') sl_str_replace_charn(c->data, c->data->len-1, '\0');
 	pthread_mutex_unlock(lock);
-	fclose(pf);
+	pclose(pf);
 }
