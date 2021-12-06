@@ -63,16 +63,17 @@ int main() {
 
 	load_signals();
 
+	// sets signals
+	for (int i=34;i<=64;i++) {
+		signal(i, signal_cell);
+	}
+
 	// run cells
 	pthread_t threads[lencells];
 	for (int i=0;i<lencells;i++) {
 		pthread_create(&threads[i], NULL, cell_start, &cells[i]);
 	}
 
-	// sets signals
-	for (int i=34;i<=64;i++) {
-		signal(i, signal_cell);
-	}
 
 	struct timespec ts;
 	ts.tv_sec = REFRESH / 1000;
