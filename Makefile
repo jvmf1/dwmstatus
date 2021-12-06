@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -L/usr/local/lib -I/usr/local/inlude
+CFLAGS=-Wall
 LIBS=-lX11 -pthread -lslib
 NAME=dwmstatus
 OBJ=cell.o
