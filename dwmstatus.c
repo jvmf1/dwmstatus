@@ -43,6 +43,7 @@ void signal_cell(int signum) {
 	if (signum <= 33 || signum >= 65) return;
 	int sig = signum-34;
 	Cell *c = signals[sig];
+	if (c==NULL) return;
 	cell_run(c, &cell_lock);
 	update_status();
 }
