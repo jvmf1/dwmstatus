@@ -40,7 +40,10 @@ void cell_run(Cell *c, pthread_mutex_t *lock) {
 	if (out==NULL) return;
 	if (sl_str_fgets(out, pf, 20)==-1) return;
 	pthread_mutex_lock(lock);
-	sl_str_set(c->data, out->data);
+	if (sl_str_set(c->data, out->data)==-1) {
+		sl_str_free(out);
+		return;
+	}
 	sl_str_free(out);
 	sl_str_replace_char(c->data, '\n', ' ');
 	if (c->data->data[c->data->len-1]==' ') sl_str_replace_charn(c->data, c->data->len-1, '\0');
