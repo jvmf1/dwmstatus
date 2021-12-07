@@ -32,7 +32,7 @@ void update_status() {
 	pthread_mutex_lock(&cell_lock);
 	sl_str_clear(status);	
 	for (int i=0;i<lencells;i++) {
-		sl_str_scat(status, cells[i].data);
+		if (sl_str_scat(status, cells[i].data)==-1) return;
 	}
 	XStoreName(display, root, status->data);
 	XSync(display, false);
