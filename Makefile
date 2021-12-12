@@ -6,7 +6,8 @@ OBJ=cell.o
 HEADERS=cell.h
 SRC=cell.c
 DESTDIR=/bin
-all = $(NAME)
+
+all: $(NAME)
 
 $(NAME): $(NAME).c config.h $(OBJ)
 	$(CC) $(CFLAGS) $(LIBS) $(NAME).c -o $(NAME) $(OBJ)
