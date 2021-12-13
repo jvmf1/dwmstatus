@@ -11,6 +11,7 @@
  */
 
 Cell cells[] = {
+	// cmd	signal	ms
 	CELL("date", -1, 1000)
 };
 
