@@ -37,10 +37,23 @@ void cell_run(Cell *c, pthread_mutex_t *lock) {
 	FILE *pf = popen(c->cmd, "r");
 	if (pf==NULL) return;
 	sl_string *out = sl_str_create_cap(c->data->cap);
-	if (out==NULL) return;
-	if (sl_str_fgets(out, pf, 20)==-1) return;
+	if (out==NULL){
+		pclose(pf);
+		return;
+	}
+	if (sl_str_fgets(out, pf, 20)==-1) {
+		sl_str_free(out);
+		pclose(pf);
+		return;
+	}
 	pthread_mutex_lock(lock);
-	sl_str_set(c->data, out->data);
+	if (sl_str_set(c->data, out->data)==-1) {
+		sl_str_free(out);
+		pclose(pf);
+		pthread_mutex_unlock(lock);
+		return;
+
+	}
 	sl_str_free(out);
 	sl_str_replace_char(c->data, '\n', ' ');
 	if (c->data->len > 0 && c->data->data[c->data->len-1]==' ') sl_str_replace_charn(c->data, c->data->len-1, '\0');
