@@ -54,7 +54,7 @@ int main() {
 	display = XOpenDisplay(NULL);
 	root = DefaultRootWindow(display);
 
-	if (status==NULL) return 1;
+	if (status==NULL || display==NULL) return 1;
 
 	// load cells
 	for (int i=0;i<lencells;i++) {
