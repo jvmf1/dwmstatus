@@ -18,7 +18,7 @@ void* cell_start(void *arg) {
 }
 
 int cell_load(Cell *c) {
-	sl_string *data = sl_str_create_cap(20);
+	sl_str *data = sl_str_create_cap(20);
 	if (data==NULL) {
 		return -1;
 	}
@@ -36,7 +36,7 @@ void cell_sleep(Cell *c) {
 void cell_run(Cell *c, pthread_mutex_t *lock) {
 	FILE *pf = popen(c->cmd, "r");
 	if (pf==NULL) return;
-	sl_string *out = sl_str_create_cap(c->data->cap);
+	sl_str *out = sl_str_create_cap(c->data->cap);
 	if (out==NULL){
 		pclose(pf);
 		return;

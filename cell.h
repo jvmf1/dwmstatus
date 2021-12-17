@@ -5,7 +5,7 @@ typedef struct Cell {
 	char *cmd;
 	int ms;
 	int signal;
-	sl_string *data;
+	sl_str *data;
 } Cell;
 
 extern pthread_mutex_t cell_lock;

@@ -18,7 +18,7 @@ Cell *signals[31];
 
 Display *display;
 Window root;
-sl_string *status;
+sl_str *status;
 
 void load_signals() {
 	for (int i=0;i<lencells;i++) {
