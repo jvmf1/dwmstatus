@@ -7,6 +7,7 @@ sudo make install
 ```
 # config.h example
 ```c
+// CELL(cmd, signal, ms)
 Cell cells[] = {
 	// will run "date" every 1000ms
 	CELL("date", -1, 1000)
