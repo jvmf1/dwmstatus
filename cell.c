@@ -47,7 +47,7 @@ void cell_run(Cell *c, pthread_mutex_t *lock) {
 		return;
 	}
 	pthread_mutex_lock(lock);
-	if (sl_str_set(c->data, out->data)==-1) {
+	if (sl_str_sset(c->data, out)==-1) {
 		sl_str_free(out);
 		pclose(pf);
 		pthread_mutex_unlock(lock);
