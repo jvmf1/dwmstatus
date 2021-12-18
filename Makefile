@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall
+CFLAGS=-Wall -Wextra
 LIBS=-lX11 -pthread -lslib
 NAME=dwmstatus
 OBJ=cell.o
