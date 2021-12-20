@@ -6,6 +6,7 @@ typedef struct Cell {
 	int ms;
 	int signal;
 	sl_str *data;
+	sl_str *buffer;
 } Cell;
 
 extern pthread_mutex_t cell_lock;

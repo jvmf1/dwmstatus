@@ -18,10 +18,12 @@ void* cell_start(void *arg) {
 }
 
 int cell_load(Cell *c) {
-	sl_str *data = sl_str_create_cap(20);
-	if (data==NULL) {
+	sl_str *data = sl_str_create_cap(32);
+	sl_str *buffer = sl_str_create_cap(32);
+	if (data==NULL || buffer==NULL) {
 		return -1;
 	}
+	c->buffer=buffer;
 	c->data=data;
 	return 0;
 }
@@ -34,27 +36,20 @@ void cell_sleep(Cell *c) {
 }
 
 void cell_run(Cell *c, pthread_mutex_t *lock) {
+	sl_str_clear(c->buffer);
 	FILE *pf = popen(c->cmd, "r");
 	if (pf==NULL) return;
-	sl_str *out = sl_str_create_cap(c->data->cap);
-	if (out==NULL){
-		pclose(pf);
-		return;
-	}
-	if (sl_str_fgets(out, pf, 20)==-1) {
-		sl_str_free(out);
+	if (sl_str_fgets(c->buffer, pf, 32)==-1) {
 		pclose(pf);
 		return;
 	}
 	pthread_mutex_lock(lock);
-	if (sl_str_sset(c->data, out)==-1) {
-		sl_str_free(out);
+	if (sl_str_sset(c->data, c->buffer)==-1) {
 		pclose(pf);
 		pthread_mutex_unlock(lock);
 		return;
 
 	}
-	sl_str_free(out);
 	sl_str_replace_char(c->data, '\n', ' ');
 	if (c->data->len > 0 && c->data->data[c->data->len-1]==' ') sl_str_replace_charn(c->data, c->data->len-1, '\0');
 	pthread_mutex_unlock(lock);
