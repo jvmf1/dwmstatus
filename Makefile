@@ -5,7 +5,7 @@ NAME=dwmstatus
 OBJ=cell.o
 HEADERS=cell.h
 SRC=cell.c
-DESTDIR=/usr/bin
+DESTDIR=/usr/local/bin
 
 all: $(NAME)
 
