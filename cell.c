@@ -1,4 +1,4 @@
-#include <slib/slstr.h>
+#include <slib/str.h>
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
